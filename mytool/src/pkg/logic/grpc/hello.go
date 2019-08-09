@@ -5,15 +5,15 @@ import (
 
 	"github.com/labstack/gommon/log"
 
-	pb "kambayashia/golang/mytool/src/pkg/logic/proto"
+	"kambayashia/golang/mytool/src/pkg/proto/v1/hello"
 )
 
 type HelloService struct{}
 
-func (h HelloService) Hello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloResponse, error) {
+func (h HelloService) Hello(ctx context.Context, in *hello.HelloRequest) (*hello.HelloResponse, error) {
 	log.Infof("Hello: %v", *in)
 
-	return &pb.HelloResponse{
+	return &hello.HelloResponse{
 		Message: "Hello, " + in.Name,
 	}, nil
 }

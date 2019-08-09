@@ -1,5 +1,5 @@
 syntax = "proto3";
-option go_package = "hello";
+option go_package = "v1/hello";
 package hello;
 
 message HelloRequest {

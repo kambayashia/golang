@@ -6,7 +6,7 @@ import (
 	"github.com/labstack/gommon/log"
 
 	gprc2 "kambayashia/golang/mytool/src/pkg/logic/grpc"
-	pb "kambayashia/golang/mytool/src/pkg/logic/proto"
+	"kambayashia/golang/mytool/src/pkg/proto/v1/hello"
 
 	"google.golang.org/grpc"
 )
@@ -19,6 +19,6 @@ func main() {
 	server := grpc.NewServer()
 
 	service := gprc2.HelloService{}
-	pb.RegisterHelloServiceServer(server, service)
+	hello.RegisterHelloServiceServer(server, service)
 	log.Fatal(server.Serve(listenPort))
 }

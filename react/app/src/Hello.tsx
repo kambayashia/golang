@@ -1,5 +1,5 @@
 import React from 'react';
-import hello from './proto/hello_grpc_web_pb';
+import hello from './proto/v1/hello_grpc_web_pb';
 import {Error} from "grpc-web";
 
 interface State {
