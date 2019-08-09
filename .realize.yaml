@@ -1,0 +1,28 @@
+settings:
+  legacy:
+    force: false
+    interval: 0s
+server:
+  status: true
+  open: false
+  port: 5002
+  host: localhost
+schema:
+- name: go
+  path: .
+  commands:
+    install:
+      status: true
+      method: go install kambayashia/golang/mytool
+    run:
+      status: true
+      method: /go/bin/mytool
+  watcher:
+    extensions:
+    - go
+    paths:
+    - /mytool
+    ignored_paths:
+    - .git
+    - .realize
+    - vendor
