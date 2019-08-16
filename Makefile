@@ -20,7 +20,7 @@ proto:
 	# https://github.com/grpc/grpc-web/pull/537
 	# またコード的に修正してみてもjs実行時に下記エラーがでる
 	# grpc: received message larger than max (1094795585 vs. 4194304)
-	# docker run -v "`pwd`:/build" -w /build --rm namely/protoc-all:latest -d proto -l go -o /build/mytool/go/src/proto
+	# docker run -v "`pwd`:/build" -w /build --rm namely/protoc-all:latest -d proto -l go -o /build/go/src/proto
 	# docker run -v "`pwd`:/build" -w /build --rm namely/protoc-all:latest -d proto -l web -o /build/react/app/src/proto
 
 	# TODO reactのeslintでeslintignoreが効かないので暫定的に各ファイルに挿入
