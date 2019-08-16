@@ -8,11 +8,11 @@ gofmt:
 	goimports -local "kambayashia/golang" -l . | xargs goimports  -local "kambayashia/golang" -w
 
 proto:
-	rm -rf mytool/src/pkg/proto react/app/src/proto
-	mkdir -p mytool/src/pkg/proto react/app/src/proto
+	rm -rf go/pkg/proto react/app/src/proto
+	mkdir -p go/pkg/proto react/app/src/proto
 	# latestが更新されてなくて古いままなので0.4.0を指定
 	docker run -v "`pwd`:/build" -w /build --rm znly/protoc:0.4.0 -I proto \
-	--go_out=plugins=grpc:/build/mytool/src/pkg/proto \
+	--go_out=plugins=grpc:/build/go/pkg/proto \
 	--js_out=import_style=commonjs,binary:/build/react/app/src/proto \
 	--grpc-web_out=import_style=commonjs,mode=grpcweb:/build/react/app/src/proto \
 	proto/v1/hello.proto

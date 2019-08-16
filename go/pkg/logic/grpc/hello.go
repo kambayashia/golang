@@ -5,7 +5,7 @@ import (
 
 	"github.com/labstack/gommon/log"
 
-	"kambayashia/golang/mytool/src/pkg/proto/v1/hello"
+	"kambayashia/golang/go/pkg/proto/v1/hello"
 )
 
 type HelloService struct{}
