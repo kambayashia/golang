@@ -2,6 +2,10 @@
 golangサンプル
 
 # 使い方
+## 必要環境
+- node v12.8.1 or later
+  - for react-scripts 3.1.0
+   
 ## repo
 ```bash
 git clone <github url> <dir>

@@ -13,15 +13,15 @@ schema:
   commands:
     install:
       status: true
-      method: go install kambayashia/golang/mytool
+      method: go install go/main.go
     run:
       status: true
-      method: /go/bin/mytool
+      method: /go/bin/main
   watcher:
     extensions:
     - go
     paths:
-    - /mytool
+    - /go
     ignored_paths:
     - .git
     - .realize
