@@ -23,9 +23,6 @@ proto:
 	# docker run -v "`pwd`:/build" -w /build --rm namely/protoc-all:latest -d proto -l go -o /build/go/src/proto
 	# docker run -v "`pwd`:/build" -w /build --rm namely/protoc-all:latest -d proto -l web -o /build/react/app/src/proto
 
-	# TODO reactのeslintでeslintignoreが効かないので暫定的に各ファイルに挿入
-	find react/app/src/proto/ -name "*.js" | xargs -n1 sed -i -e "1i/* eslint-disable */"
-
 cert:
 	brew install mkcert
 	mkcert -install

@@ -1,0 +1,15 @@
+{
+//  "parserOptions": {
+//    "sourceType": "module",
+//    "ecmaVersion": 2015,
+//    "project": "./tsconfig.json"
+//  },
+  "overrides": [
+//    {
+//      "files": ["src/proto/**/*.js"],
+//      "rules": {
+//        "no-undef": "off"
+//      },
+//    }
+  ]
+}
