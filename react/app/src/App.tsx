@@ -1,12 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Hello from './Hello';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import Hello from "./Hello";
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Hello/>
+      <Hello />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -23,6 +23,6 @@ const App: React.FC = () => {
       </header>
     </div>
   );
-}
+};
 
 export default App;

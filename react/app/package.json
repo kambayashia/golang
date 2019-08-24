@@ -21,10 +21,14 @@
     "start": "EXTEND_ESLINT=true react-scripts start",
     "build": "EXTEND_ESLINT=true react-scripts build",
     "test": "EXTEND_ESLINT=true react-scripts test",
-    "eject": "EXTEND_ESLINT=true react-scripts eject"
+    "eject": "EXTEND_ESLINT=true react-scripts eject",
+    "format": "prettier-eslint --write 'src/**/*.ts' 'src/**/*.tsx'"
   },
   "eslintConfig": {
-    "extends": ["react-app", "shared-config"]
+    "extends": [
+      "react-app",
+      "shared-config"
+    ]
   },
   "browserslist": {
     "production": [
@@ -37,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier-eslint-cli": "^5.0.0"
   }
 }
