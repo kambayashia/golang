@@ -22,7 +22,8 @@
     "build": "EXTEND_ESLINT=true react-scripts build",
     "test": "EXTEND_ESLINT=true react-scripts test",
     "eject": "EXTEND_ESLINT=true react-scripts eject",
-    "format": "prettier-eslint --write 'src/**/*.ts' 'src/**/*.tsx'"
+    "format": "prettier-eslint --write 'src/**/*.ts' 'src/**/*.tsx'",
+    "check-format": "prettier-eslint --list-different 'src/**/*.ts' 'src/**/*.tsx'"
   },
   "eslintConfig": {
     "extends": [

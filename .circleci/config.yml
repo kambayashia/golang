@@ -16,7 +16,7 @@ executors:
         type: string
     docker:
       - image: circleci/node:<< parameters.node-version >>
-    working_directory: ~/repo
+    working_directory: ~/project/react/app
 
 commands:
   go_mod_download:
@@ -73,7 +73,7 @@ jobs:
 
     steps:
       - checkout:
-          path: ~/repo
+          path: ~/project
 
       # Download and cache dependencies
       - restore_cache:
@@ -91,6 +91,35 @@ jobs:
 
       # run tests!
       - run: yarn test
+  lint_node:
+    parameters:
+      node-version:
+        type: string
+
+    executor:
+      name: build_node
+      node-version: << parameters.node-version >>
+
+    steps:
+      - checkout:
+          path: ~/project
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: yarn
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      # run tests!
+      - run: yarn check-format
 
 workflows:
   golang-workflow:
@@ -101,4 +130,6 @@ workflows:
   node-workflow:
     jobs:
       - build_node:
+          node-version: "12.9"
+      - lint_node:
           node-version: "12.9"
