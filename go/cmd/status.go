@@ -18,6 +18,8 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/labstack/gommon/log"
+
 	"github.com/spf13/cobra"
 )
 
@@ -55,5 +57,7 @@ func init() {
 	// statusCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	statusCmd.Flags().StringVarP(&o.sample, "sample", "s", "default_value", "サンプル引数")
 	statusCmd.Flags().StringVarP(&o.sampleRequired, "sample_required", "", "", "サンプル引数(必須)")
-	statusCmd.MarkFlagRequired("sample_required")
+	if err := statusCmd.MarkFlagRequired("sample_required"); err != nil {
+		log.Panic(err)
+	}
 }
