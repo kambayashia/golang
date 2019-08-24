@@ -1,7 +1,7 @@
 version: 2.1
 
 executors:
-  build:
+  build_golang:
     parameters:
       go-version:
         type: string
@@ -10,6 +10,13 @@ executors:
         environment:
           GO111MODULE: "on"
     working_directory: /go/src/app/go
+  build_node:
+    parameters:
+      node-version:
+        type: string
+    docker:
+      - image: circleci/node:<< parameters.node-version >>
+    working_directory: ~/project/react/app
 
 commands:
   go_mod_download:
@@ -28,7 +35,7 @@ commands:
             - "/go/pkg/mod"
 
 jobs:
-  build:
+  build_golang:
     parameters:
       go-version:
         type: string
@@ -36,7 +43,7 @@ jobs:
         type: string
 
     executor:
-      name: build
+      name: build_golang
       go-version: << parameters.go-version >>
 
     steps:
@@ -55,10 +62,74 @@ jobs:
       - run:
           name: Run Tests
           command: go test -race -v ./cmd/... ./pkg/...
+  build_node:
+    parameters:
+      node-version:
+        type: string
+
+    executor:
+      name: build_node
+      node-version: << parameters.node-version >>
+
+    steps:
+      - checkout:
+          path: ~/project
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: yarn
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      # run tests!
+      - run: yarn test
+  lint_node:
+    parameters:
+      node-version:
+        type: string
+
+    executor:
+      name: build_node
+      node-version: << parameters.node-version >>
+
+    steps:
+      - checkout:
+          path: ~/project
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: yarn
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      # run tests!
+      - run: yarn check-format
 
 workflows:
   golang-workflow:
     jobs:
-      - build:
+      - build_golang:
           go-version: "1.12.6"
           golangci-lint-version: "1.15.0"
+  node-workflow:
+    jobs:
+      - build_node:
+          node-version: "12.9"
+      - lint_node:
+          node-version: "12.9"
